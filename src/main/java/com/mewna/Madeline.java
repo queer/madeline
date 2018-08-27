@@ -123,8 +123,8 @@ public final class Madeline {
                                                     .queue(__ -> event.getChannel()
                                                             .sendMessage(event.getUser().getAsMention() + " haha no selftato for you")
                                                             .queue()));
+                                    return;
                                 }
-                                return;
                             }
                             
                             final String data = map.get(event.getMessageId());
