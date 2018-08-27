@@ -5,10 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.dv8tion.jda.core.AccountType;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.JDABuilder;
-import net.dv8tion.jda.core.MessageBuilder;
+import net.dv8tion.jda.core.*;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.Message.Attachment;
 import net.dv8tion.jda.core.entities.MessageReaction.ReactionEmote;
@@ -119,12 +116,14 @@ public final class Madeline {
                                     .complete();
                             
                             if(potatoMessage.getAuthor().getId().equalsIgnoreCase(event.getUser().getId())) {
-                                potatoMessage.getReactions().stream()
-                                        .filter(e -> e.getReactionEmote().getName().equalsIgnoreCase(POTATO))
-                                        .forEach(e -> e.removeReaction(event.getUser())
-                                                .queue(__ -> event.getChannel()
-                                                        .sendMessage(event.getUser().getAsMention() + " haha no selftato for you")
-                                                        .queue()));
+                                if(!potatoMessage.getMember().hasPermission(Permission.ADMINISTRATOR)) {
+                                    potatoMessage.getReactions().stream()
+                                            .filter(e -> e.getReactionEmote().getName().equalsIgnoreCase(POTATO))
+                                            .forEach(e -> e.removeReaction(event.getUser())
+                                                    .queue(__ -> event.getChannel()
+                                                            .sendMessage(event.getUser().getAsMention() + " haha no selftato for you")
+                                                            .queue()));
+                                }
                                 return;
                             }
                             
