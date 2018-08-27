@@ -117,6 +117,17 @@ public final class Madeline {
                         if(emote.getName().equalsIgnoreCase(POTATO) && emote.getEmote() == null) {
                             final Message potatoMessage = channel.getMessageById(event.getMessageId())
                                     .complete();
+                            
+                            if(potatoMessage.getAuthor().getId().equalsIgnoreCase(event.getUser().getId())) {
+                                potatoMessage.getReactions().stream()
+                                        .filter(e -> e.getReactionEmote().getName().equalsIgnoreCase(POTATO))
+                                        .forEach(e -> e.removeReaction(event.getUser())
+                                                .queue(__ -> event.getChannel()
+                                                        .sendMessage(event.getUser().getAsMention() + " haha no selftato for you")
+                                                        .queue()));
+                                return;
+                            }
+                            
                             final String data = map.get(event.getMessageId());
                             final PotatoMessage potato;
                             if(data != null) {
