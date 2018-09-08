@@ -9,4 +9,4 @@ COPY --from=0 /app/target/madeline*.jar /app/madeline.jar
 
 WORKDIR /app
 
-ENTRYPOINT ["/usr/bin/java", "-Xmx256M","-jar", "/app/madeline.jar"]
+ENTRYPOINT ["/usr/bin/java", "-Xmx128M","-jar", "/app/madeline.jar"]
