@@ -37,9 +37,14 @@ public final class Madeline {
     private static final ObjectMapper MAPPER = new ObjectMapper();
     private static final int THRESHOLD = 1;
     private final Logger logger = LoggerFactory.getLogger(getClass());
-    private final DB db = DBMaker.fileDB("madeline.db").make();
+    private final DB db;
     
     private Madeline() {
+        if(System.getenv("RECOVERY") != null) {
+            db = DBMaker.fileDB("madeline.db").checksumHeaderBypass().make();;
+        } else {
+            db = DBMaker.fileDB("madeline.db").make();
+        }
     }
     
     public static void main(final String[] args) throws LoginException, InterruptedException {
