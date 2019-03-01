@@ -122,7 +122,11 @@ public final class Madeline {
                     public void onGuildMessageReactionAdd(final GuildMessageReactionAddEvent event) {
                         final ReactionEmote emote = event.getReactionEmote();
                         final TextChannel channel = event.getChannel();
-                        if(emote.getName().equalsIgnoreCase(POTATO) && emote.getEmote() == null) {
+                        final boolean unicode = !POTATO.contains("<");
+                        final boolean hasId = emote.getId() != null;
+                        final boolean unicodeMatch = unicode && emote.getName().equalsIgnoreCase(POTATO);
+                        final boolean idMatch = hasId && POTATO.equalsIgnoreCase(emote.getId());
+                        if(unicodeMatch || idMatch) {
                             final Message potatoMessage = channel.getMessageById(event.getMessageId())
                                     .complete();
                             
