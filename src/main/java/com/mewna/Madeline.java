@@ -31,7 +31,7 @@ import java.util.Set;
  * @since 8/27/18.
  */
 public final class Madeline {
-    private static final String POTATO = "\uD83E\uDD54";
+    private static final String POTATO = Optional.ofNullable(System.getenv("EMOJI")).orElse("\uD83E\uDD54");
     private static final String CHANNEL = System.getenv("CHANNEL");
     private static final String TOKEN = System.getenv("TOKEN");
     private static final ObjectMapper MAPPER = new ObjectMapper();
