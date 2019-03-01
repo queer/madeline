@@ -74,8 +74,9 @@ public final class Madeline {
                         
                         final boolean unicode = !POTATO.contains("<");
                         final boolean hasId = emote.getId() != null;
-                        //noinspection UnnecessaryParentheses
-                        if((unicode && emote.getName().equalsIgnoreCase(POTATO)) || (hasId && POTATO.equals(emote.getId()))) {
+                        final boolean unicodeMatch = unicode && emote.getName().equalsIgnoreCase(POTATO);
+                        final boolean idMatch = hasId && POTATO.equalsIgnoreCase(emote.getId());
+                        if(unicodeMatch || idMatch) {
                             final String data = map.get(event.getMessageId());
                             final PotatoMessage potato;
                             if(data != null) {
