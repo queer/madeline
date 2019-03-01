@@ -26,23 +26,11 @@
             <artifactId>JDA</artifactId>
             <version>3.7.1_402</version>
         </dependency>
-        <dependency>
-            <groupId>net.dv8tion</groupId>
-            <artifactId>JDA</artifactId>
-            <version>3.7.1_402</version>
-            <classifier>sources</classifier>
-        </dependency>
-        <dependency>
-            <groupId>net.dv8tion</groupId>
-            <artifactId>JDA</artifactId>
-            <version>3.7.1_402</version>
-            <classifier>javadoc</classifier>
-        </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.20</version>
+            <version>1.18.2</version>
         </dependency>
 
         <dependency>
