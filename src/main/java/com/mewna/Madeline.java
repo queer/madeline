@@ -42,7 +42,7 @@ public final class Madeline {
     
     private Madeline() {
         if(System.getenv("RECOVERY") != null) {
-            db = DBMaker.fileDB("madeline.db").checksumHeaderBypass().make();;
+            db = DBMaker.fileDB("madeline.db").checksumHeaderBypass().make();
         } else {
             db = DBMaker.fileDB("madeline.db").make();
         }
@@ -71,7 +71,11 @@ public final class Madeline {
                     @Override
                     public void onGuildMessageReactionRemove(final GuildMessageReactionRemoveEvent event) {
                         final ReactionEmote emote = event.getReactionEmote();
-                        if(emote.getName().equalsIgnoreCase(POTATO) && emote.getEmote() == null) {
+                        
+                        final boolean unicode = !POTATO.contains("<");
+                        final boolean hasId = emote.getId() != null;
+                        //noinspection UnnecessaryParentheses
+                        if((unicode && emote.getName().equalsIgnoreCase(POTATO)) || (hasId && POTATO.equals(emote.getId()))) {
                             final String data = map.get(event.getMessageId());
                             final PotatoMessage potato;
                             if(data != null) {
