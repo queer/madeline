@@ -165,7 +165,7 @@ public final class Madeline {
                                     event.getJDA().getTextChannelById(CHANNEL).getMessageById(potato.logId)
                                             .queue(msg -> msg.editMessage(
                                                     new MessageBuilder(msg)
-                                                            .setContent(String.format("%s **%s**", POTATO,
+                                                            .setContent(String.format("%s **%s**", emoji,
                                                                     potato.reactors.size()))
                                                             .build()
                                             ).queue());
