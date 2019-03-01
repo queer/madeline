@@ -71,11 +71,12 @@ public final class Madeline {
                     @Override
                     public void onGuildMessageReactionRemove(final GuildMessageReactionRemoveEvent event) {
                         final ReactionEmote emote = event.getReactionEmote();
-                        
-                        final boolean unicode = !POTATO.contains("<");
+    
+                        final boolean unicode = !POTATO.matches("\\d+");
                         final boolean hasId = emote.getId() != null;
                         final boolean unicodeMatch = unicode && emote.getName().equalsIgnoreCase(POTATO);
                         final boolean idMatch = hasId && POTATO.equalsIgnoreCase(emote.getId());
+                        final String emoji = unicodeMatch ? POTATO : emote.getEmote().getAsMention();
                         if(unicodeMatch || idMatch) {
                             final String data = map.get(event.getMessageId());
                             final PotatoMessage potato;
@@ -100,7 +101,7 @@ public final class Madeline {
                                     event.getJDA().getTextChannelById(CHANNEL).getMessageById(potato.logId)
                                             .queue(msg -> msg.editMessage(
                                                     new MessageBuilder(msg)
-                                                            .setContent(String.format("%s **%s**", POTATO,
+                                                            .setContent(String.format("%s **%s**", emoji,
                                                                     potato.reactors.size()))
                                                             .build()
                                             ).queue());
@@ -122,10 +123,11 @@ public final class Madeline {
                     public void onGuildMessageReactionAdd(final GuildMessageReactionAddEvent event) {
                         final ReactionEmote emote = event.getReactionEmote();
                         final TextChannel channel = event.getChannel();
-                        final boolean unicode = !POTATO.contains("<");
+                        final boolean unicode = !POTATO.matches("\\d+");
                         final boolean hasId = emote.getId() != null;
                         final boolean unicodeMatch = unicode && emote.getName().equalsIgnoreCase(POTATO);
                         final boolean idMatch = hasId && POTATO.equalsIgnoreCase(emote.getId());
+                        final String emoji = unicodeMatch ? POTATO : emote.getEmote().getAsMention();
                         if(unicodeMatch || idMatch) {
                             final Message potatoMessage = channel.getMessageById(event.getMessageId())
                                     .complete();
@@ -184,7 +186,7 @@ public final class Madeline {
                                     );
                                     final Message log = event.getJDA().getTextChannelById(CHANNEL).sendMessage(
                                             new MessageBuilder()
-                                                    .setContent(String.format("%s **%s**", POTATO,
+                                                    .setContent(String.format("%s **%s**", emoji,
                                                             potato.reactors.size()))
                                                     .setEmbed(
                                                             new EmbedBuilder()
