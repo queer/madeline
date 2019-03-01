@@ -1,4 +1,4 @@
-FROM maven:3
+FROM maven:3.5.3-jdk11
 
 COPY . /app
 WORKDIR /app
